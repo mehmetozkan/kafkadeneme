@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class KafkadenemeApplication {
 
     //docker-compose -f docker-compose.yml up -d
+    //docker-compose -f docker-kafka.yml up -d
     //https://www.youtube.com/watch?v=dLDDCYAGNpM
     //https://github.com/HaydiKodlayalim/spring-examples
     // postman http://localhost:8080/message {"message": "Test Kuyruk1"}
