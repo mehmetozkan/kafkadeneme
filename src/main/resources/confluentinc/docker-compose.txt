@@ -1,0 +1,35 @@
+https://better-coding.com/building-apache-kafka-cluster-using-docker-compose-and-virtualbox/
+https://medium.com/better-programming/kafka-docker-run-multiple-kafka-brokers-and-zookeeper-services-in-docker-3ab287056fd5
+
+docker-compose -f <docker-compose_file_name> up -d
+docker-compose -f docker-compose.yml up -d
+docker-compose up -d
+docker ps
+docker logs <zookeeper-1_containerId>
+docker run --net=host --rm confluentinc/cp-zookeeper:latest bash -c “"echo stat | nc localhost <ZOOKEEPER_CLIENT_PORT> | grep Mode"
+docker logs <kafka-1_containerId>
+docker logs <kafka-2_containerId>
+docker logs <kafka-3_containerId>
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-topics --create --topic <topic_name> --partitions <Number_of_partitions> --replication-factor <number_of_replication_factor> --if-not-exists --zookeeper localhost:32181
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-topics --describe --topic testTopic --zookeeper localhost:32181
+docker run --net=host --rm confluentinc/cp-kafka:latest bash -c "seq 42 | kafka-console-producer --broker-list localhost:29092 --topic testTopic && echo ‘Producer 42 message.’"
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-console-consumer --bootstrap-server localhost:29092 --topic testTopic --new-consumer --from-beginning --max-message 42
+we can access all Kafka brokers with the below host:
+Kafka_host = “0.0.0.0:19092,0.0.0.0:29092,0.0.0.0:39092”
+
+
+
+
+
+
+docker run --net=host --rm confluentinc/cp-zookeeper:latest bash -c "echo stat | nc localhost 22181 | grep Mode"
+
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-topics --create --topic vf-topic --partitions 1 --replication-factor 1 --if-not-exists --zookeeper localhost:32181
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-topics --create --topic vf-topic --partitions 1 --replication-factor 1 --if-not-exists --zookeeper localhost:32181
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-topics --describe --topic vf-topic --zookeeper localhost:32181
+docker run --net=host --rm confluentinc/cp-kafka:latest bash -c "seq 42 | kafka-console-producer --broker-list localhost:29092 --topic vf-topic && echo 'Producer 42 message.'"
+
+
+docker run --net=host --rm confluentinc/cp-kafka:latest kafka-console-consumer --bootstrap-server localhost:29092 --topic vf-topic --new -consumer --from-beginning --max-message 42
+
+ 
